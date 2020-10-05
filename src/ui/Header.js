@@ -154,22 +154,16 @@ export default function Header(props) {
   const menuOptions = [
     { name: 'Services', link: '/services', activeIndex: 1, selectedIndex: 0 },
     {
-      name: 'Custom Software Development',
-      link: '/customsoftware',
+      name: 'Civil Engineering',
+      link: '/services/civil-engineering',
       activeIndex: 1,
       selectedIndex: 1,
     },
     {
-      name: 'iOS/Android App Development',
-      link: '/mobileapps',
+      name: 'Land Surveying',
+      link: '/services/land-surveying',
       activeIndex: 1,
       selectedIndex: 2,
-    },
-    {
-      name: 'Website Development',
-      link: '/websites',
-      activeIndex: 1,
-      selectedIndex: 3,
     },
   ];
 
@@ -202,9 +196,6 @@ export default function Header(props) {
             }
           }
           break;
-        case '/estimate':
-          props.setValue(5);
-          break;
         default:
           break;
       }
@@ -213,6 +204,21 @@ export default function Header(props) {
 
   const tabs = (
     <React.Fragment>
+      <LocationOnIcon color="primary" className={classes.icon} />
+      <div>
+        <Typography variant="subtitle1">208 3RD AVE NW</Typography>
+        <Typography
+          color="primary"
+          variant="subtitle2"
+          className={classes.town}
+        >
+          East Grand Forks, MN 56721
+        </Typography>
+      </div>
+      <PhoneIcon color="primary" className={classes.icon} />
+      <Typography variant="subtitle1">(701) 772-7058</Typography>
+      <EmailIcon color="primary" className={classes.icon} />
+      <Typography variant="subtitle1">info@pribulaengineering.com</Typography>
       <Tabs
         value={props.value}
         onChange={handleChange}
@@ -340,23 +346,7 @@ export default function Header(props) {
               >
                 <img alt="company logo" className={classes.logo} src={logo} />
               </Button>
-              <LocationOnIcon color="primary" className={classes.icon} />
-              <div>
-                <Typography variant="subtitle1">208 3RD AVE NW</Typography>
-                <Typography
-                  color="primary"
-                  variant="subtitle2"
-                  className={classes.town}
-                >
-                  East Grand Forks, MN 56721
-                </Typography>
-              </div>
-              <PhoneIcon color="primary" className={classes.icon} />
-              <Typography variant="subtitle1">(701) 772-7058</Typography>
-              <EmailIcon color="primary" className={classes.icon} />
-              <Typography variant="subtitle1">
-                info@pribulaengineering.com
-              </Typography>
+
               {matches ? drawer : tabs}
             </Toolbar>
           </Container>

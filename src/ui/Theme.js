@@ -39,16 +39,16 @@ export default createMuiTheme({
     },
     h3: {
       fontFamily: 'Montserrat',
-      fontWeight: 700,
-      fontSize: '1.5rem',
+      fontWeight: 900,
+      fontSize: '2rem',
       color: 'white',
       // WebkitTextStrokeWidth: '2px',
       // WebkitTextStrokeColor: 'yellow',
     },
     h4: {
       fontFamily: 'Montserrat',
-      fontSize: '1.75rem',
-      color: blue,
+      fontSize: '1.5rem',
+      color: 'white',
       fontWeight: 700,
     },
     subtitle1: {

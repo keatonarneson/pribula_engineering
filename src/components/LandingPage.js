@@ -5,14 +5,18 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 
 import ditch from '../assets/ditch_black.jpg';
-import survey from '../assets/survey_blue.jpg';
+import survey from '../assets/survey.jpg';
 import bk from '../assets/bk_blue.jpg';
-import civil3d from '../assets/civil3d_black.jpg';
+import civil3d from '../assets/drafting.jpg';
 import drain from '../assets/drain.jpg';
 import straw from '../assets/straw_black.jpg';
 import paving from '../assets/paving.jpg';
+
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const useStyles = makeStyles(theme => ({
   container: { position: 'relative' },
@@ -105,6 +109,10 @@ const useStyles = makeStyles(theme => ({
     paddingTop: '3rem',
     paddingBottom: '3rem',
   },
+  services: {
+    paddingTop: '3rem',
+    paddingBottom: '3rem',
+  },
 }));
 
 export default function LandingPage(props) {
@@ -112,6 +120,22 @@ export default function LandingPage(props) {
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const images = [
+    {
+      original: 'https://picsum.photos/id/1018/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1018/250/150/',
+    },
+    {
+      original: 'https://picsum.photos/id/1015/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1015/250/150/',
+    },
+    {
+      original: 'https://picsum.photos/id/1019/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1019/250/150/',
+    },
+  ];
+
   return (
     <React.Fragment>
       <Grid container className={classes.darkBackground}>
@@ -119,7 +143,7 @@ export default function LandingPage(props) {
         <div className={classes.headerBlock}>
           <Typography variant="h2">PRIBULA ENGINEERING, PLLC.</Typography>
           <div className={classes.secondaryWrapper}>
-            <Typography variant="h3" className={classes.secondary}>
+            <Typography variant="h4" className={classes.secondary}>
               Civil Engineering ∙ Land Surveying
             </Typography>
           </div>
@@ -132,44 +156,56 @@ export default function LandingPage(props) {
           </Button>
         </div>
       </Grid>
-      <Typography color="primary" variant="h3">
-        What We Do
-      </Typography>
-      <Grid container>
-        <Grid item className={classes.container}>
-          <Grid item container className={classes.imgWrapper}>
-            <img alt="alt" src={civil3d} width="308px" />
-            <Typography className={classes.textBlock}>Design</Typography>
-          </Grid>
+
+      <Grid container direction="column" className={classes.projects}>
+        <Grid item container justify="center">
+          <Typography gutterBottom color="primary" variant="h3">
+            What We Do
+          </Typography>
         </Grid>
-        <Grid item className={classes.container}>
-          <Grid item container className={classes.imgWrapper}>
-            <img alt="alt" src={survey} width="308px" />
-            <Typography className={classes.textBlock}>
-              Land Surveying
-            </Typography>
+        <Grid item container justify="space-between">
+          <Grid item>
+            <Grid
+              item
+              container
+              direction="column"
+              alignItems="center"
+              xs={12}
+              sm={6}
+            >
+              <Grid item>
+                <img alt="alt" src={civil3d} width="575px" />
+              </Grid>
+              <Grid item>
+                <Typography color="primary">Civil Engineering</Typography>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item className={classes.container}>
-          <Grid item container className={classes.imgWrapper}>
-            <img alt="alt" src={ditch} width="308px" />
-            <Typography className={classes.textBlock}>
-              Water Resources
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid item className={classes.container}>
-          <Grid item container className={classes.imgWrapper}>
-            <img alt="alt" src={bk} width="308px" />
-            <Typography className={classes.textBlock}>
-              Site Development
-            </Typography>
+          <Grid item>
+            <Grid
+              item
+              container
+              direction="column"
+              alignItems="center"
+              xs={12}
+              sm={6}
+            >
+              <Grid item>
+                <img alt="alt" src={survey} width="575px" />
+              </Grid>
+              <Grid item>
+                <Typography color="primary">Land Surveying</Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
+
       <Grid container className={classes.fixedBackground}>
         <Container className={classes.aboutUs}>
-          <Typography variant="h3">Who We Are</Typography>
+          <Typography color="primary" variant="h3">
+            Who We Are
+          </Typography>
           <Typography paragraph variant="body1">
             Established in 1999, Pribula Engineering, PLLC. is a full service
             Civil Engineering and Land Surveying Company serving Northeastern
@@ -200,8 +236,9 @@ export default function LandingPage(props) {
             Projects
           </Typography>
         </Grid>
-        <Grid item className={classes.imgWrapper}>
-          <img alt="alt" src={paving} width="1232px" />
+        <Grid item>
+          {/* <img alt="alt" src={paving} width="1232px" /> */}
+          <ImageGallery items={images} />
         </Grid>
       </Grid>
     </React.Fragment>
