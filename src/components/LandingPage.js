@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 
 import ditch from '../assets/ditch_black.jpg';
 import survey from '../assets/survey.jpg';
@@ -14,26 +14,14 @@ import civil3d from '../assets/drafting.jpg';
 import drain from '../assets/drain.jpg';
 import straw from '../assets/straw_black.jpg';
 import paving from '../assets/paving.jpg';
+import rebar from '../assets/rebar_huge_darkened.jpg';
 
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 const useStyles = makeStyles(theme => ({
-  container: { position: 'relative' },
-  grey: { backgroundColor: 'grey' },
-  textBlock: {
-    position: 'absolute',
-    bottom: '20px',
-    right: '20px',
-    backgroundColor: 'black',
-    color: 'white',
-    paddingLeft: '20px',
-    paddingRight: '20px',
-  },
   headerBlock: {
     position: 'absolute',
-    top: '0',
-    left: '0',
     textAlign: 'center',
     width: '100%',
     height: '100%',
@@ -41,35 +29,22 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     display: 'flex',
-    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    // color: theme.palette.common.blue,
   },
   imgWrapper: {
-    transition: '0.3s',
-    '&:hover': {
-      transform: 'translate(0, -10px)',
-      cursor: 'pointer',
-    },
+    // transition: '0.3s',
+    // '&:hover': {
+    //   transform: 'translate(0, -10px)',
+    //   cursor: 'pointer',
+    //},
+    maxWidth: '600px',
   },
-  fullWidth: {
-    left: '50%',
-    marginLeft: '-50vw',
-    marginRight: '-50vw',
-    maxWidth: '99.8vw',
-    position: 'relative',
-    right: '50%',
-    width: '100vw',
-    opacity: '0.7',
-  },
+
   darkBackground: {
-    left: '50%',
-    marginLeft: '-50vw',
-    marginRight: '-50vw',
-    maxWidth: '99.6vw',
-    position: 'relative',
-    right: '50%',
-    width: '100vw',
-    backgroundColor: 'black',
+    backgroundImage: `url(${drain})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'top center',
+    height: '100vh',
   },
 
   secondaryWrapper: {
@@ -79,26 +54,21 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     backgroundColor: 'white',
-    color: theme.palette.common.blue,
+    color: theme.palette.common.red,
     fontFamily: 'Montserrat',
     fontWeight: '700',
   },
   fixedBackground: {
     position: 'relative',
-    backgroundImage: `url(${straw})`,
+    backgroundImage: `url(${rebar})`,
     backgroundAttachment: 'fixed',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: '100%',
-    left: '50%',
-    marginLeft: '-50vw',
-    marginRight: '-50vw',
-    maxWidth: '99.8vw',
-    right: '50%',
-    width: '100vw',
-    // opacity: '0.7',
     textAlign: 'center',
+    [theme.breakpoints.down('md')]: {
+      backgroundAttachment: 'scroll',
+    },
   },
   aboutUs: {
     paddingTop: '3rem',
@@ -112,12 +82,37 @@ const useStyles = makeStyles(theme => ({
   services: {
     paddingTop: '3rem',
     paddingBottom: '3rem',
+    width: '100%',
+  },
+  h2: {
+    ...theme.typography.h2,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '2.5rem',
+    },
+  },
+  h4: {
+    ...theme.typography.h4,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+    },
+  },
+  body1: {
+    ...theme.typography.body1,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+    },
+  },
+  link: {
+    textDecoration: 'none',
+    color: theme.palette.common.red,
+    fontWeight: '500',
   },
 }));
 
 export default function LandingPage(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const matchesLG = useMediaQuery(theme.breakpoints.up('lg'));
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -138,18 +133,22 @@ export default function LandingPage(props) {
 
   return (
     <React.Fragment>
-      <Grid container className={classes.darkBackground}>
-        <img alt="drain" src={drain} className={classes.fullWidth} />
+      <Grid container xs={12} wrap="wrap" className={classes.darkBackground}>
         <div className={classes.headerBlock}>
-          <Typography variant="h2">PRIBULA ENGINEERING, PLLC.</Typography>
+          <Typography variant="h2" className={classes.h2}>
+            PRIBULA ENGINEERING, PLLC.
+          </Typography>
           <div className={classes.secondaryWrapper}>
-            <Typography variant="h4" className={classes.secondary}>
+            <Typography variant="h4" className={classes.h4}>
               Civil Engineering ∙ Land Surveying
             </Typography>
           </div>
           <Button
             variant="contained"
             disableElevation
+            component={Link}
+            to="/contact"
+            onClick={() => props.setValue(4)}
             className={classes.button}
           >
             GET STARTED
@@ -157,68 +156,114 @@ export default function LandingPage(props) {
         </div>
       </Grid>
 
-      <Grid container direction="column" className={classes.projects}>
-        <Grid item container justify="center">
-          <Typography gutterBottom color="primary" variant="h3">
-            What We Do
-          </Typography>
-        </Grid>
-        <Grid item container justify="space-between">
-          <Grid item>
-            <Grid
-              item
-              container
-              direction="column"
-              alignItems="center"
-              xs={12}
-              sm={6}
-            >
-              <Grid item>
-                <img alt="alt" src={civil3d} width="575px" />
+      <Grid container direction="column" className={classes.services}>
+        <Container>
+          <Grid item container justify="center">
+            <Typography gutterBottom color="primary" variant="h3">
+              What We Do
+            </Typography>
+          </Grid>
+          <Grid item container justify={matchesLG ? 'space-between' : 'center'}>
+            <Grid item>
+              <Grid item container direction="column" alignItems="center">
+                <Grid
+                  item
+                  className={classes.imgWrapper}
+                  component={Link}
+                  to="/services/civil-engineering"
+                  onClick={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(1);
+                  }}
+                >
+                  <img
+                    alt="civil-3d"
+                    src={civil3d}
+                    xs={12}
+                    sm={6}
+                    width="100%"
+                  />
+                </Grid>
+                <Grid item style={matchesLG ? null : { marginBottom: '3rem' }}>
+                  <Typography
+                    color="primary"
+                    component={Link}
+                    to="/services/civil-engineering"
+                    onClick={() => {
+                      props.setValue(1);
+                      props.setSelectedIndex(2);
+                    }}
+                    className={classes.link}
+                  >
+                    Civil Engineering
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Typography color="primary">Civil Engineering</Typography>
+            </Grid>
+            <Grid item>
+              <Grid item container direction="column" alignItems="center">
+                <Grid
+                  item
+                  className={classes.imgWrapper}
+                  component={Link}
+                  to="/services/land-surveying"
+                  onClick={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(2);
+                  }}
+                >
+                  <img
+                    alt="surveyor"
+                    src={survey}
+                    xs={12}
+                    sm={6}
+                    width="100%"
+                  />
+                </Grid>
+                <Grid item>
+                  <Typography
+                    color="primary"
+                    component={Link}
+                    to="/services/land-surveying"
+                    onClick={() => {
+                      props.setValue(1);
+                      props.setSelectedIndex(2);
+                    }}
+                    className={classes.link}
+                  >
+                    Land Surveying
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
-            <Grid
-              item
-              container
-              direction="column"
-              alignItems="center"
-              xs={12}
-              sm={6}
-            >
-              <Grid item>
-                <img alt="alt" src={survey} width="575px" />
-              </Grid>
-              <Grid item>
-                <Typography color="primary">Land Surveying</Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+        </Container>
       </Grid>
 
-      <Grid container className={classes.fixedBackground}>
+      <Grid container xs={12} className={classes.fixedBackground}>
         <Container className={classes.aboutUs}>
-          <Typography color="primary" variant="h3">
+          <Typography
+            color="primary"
+            variant="h3"
+            style={{ WebkitTextStroke: '1px black' }}
+          >
             Who We Are
           </Typography>
-          <Typography paragraph variant="body1">
-            Established in 1999, Pribula Engineering, PLLC. is a full service
-            Civil Engineering and Land Surveying Company serving Northeastern
-            North Dakota and Northwestern Minnesota. Established in 1999,
-            Pribula Engineering, PLLC. is a full service Civil Engineering and
-            Land Surveying Company serving Northeastern North Dakota and
-            Northwestern Minnesota. Established in 1999, Pribula Engineering,
-            PLLC. is a full service Civil Engineering and Land Surveying Company
-            serving Northeastern North Dakota and Northwestern Minnesota.
+          <Typography paragraph variant="body1" className={classes.body1}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
+            architecto perferendis mollitia odit possimus voluptates ea quod
+            deserunt pariatur ipsa unde adipisci, iusto suscipit accusamus autem
+            hic recusandae nostrum. Delectus sint voluptas rerum amet, in iste
+            quos. Placeat dolorum quisquam velit esse iure expedita vero ad
+            officiis vitae! Error, vitae?
           </Typography>
           <Button
             variant="contained"
             disableElevation
+            component={Link}
+            to="/about"
+            onClick={() => props.setValue(5)}
+            className={classes.button}
             className={classes.button}
           >
             ABOUT US
@@ -229,6 +274,7 @@ export default function LandingPage(props) {
         container
         direction="column"
         alignItems="center"
+        xs={12}
         className={classes.projects}
       >
         <Grid item>
