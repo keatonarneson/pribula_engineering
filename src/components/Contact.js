@@ -10,17 +10,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 
+import TitleBar from '../components/ui/TitleBar';
+
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 
 const useStyles = makeStyles(theme => ({
-  titleBar: {
-    backgroundColor: theme.palette.common.red,
-    width: '100%',
-    textAlign: 'center',
-    padding: '1rem',
-  },
   grey: {
     backgroundColor: 'grey',
   },
@@ -102,13 +98,8 @@ export default function Contact(props) {
 
   return (
     <React.Fragment>
+      <TitleBar title={'Contact Us'} />
       <Grid container direction="column" alignItems="center">
-        <Grid item className={classes.titleBar}>
-          <Typography color="secondary" variant="h3">
-            Contact Us
-          </Typography>
-        </Grid>
-
         <Container>
           <Grid container justify="center">
             <Grid item container direction="column" style={{ width: '30em' }}>
